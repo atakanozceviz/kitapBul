@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"runtime"
 
 	"strings"
@@ -16,7 +17,7 @@ func init() {
 }
 
 func main() {
-	port := "8080" //os.Getenv("PORT")
+	port := os.Getenv("PORT")
 	app := iris.New()
 	app.Adapt(
 		iris.DevLogger(),
