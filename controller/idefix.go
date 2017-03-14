@@ -17,7 +17,7 @@ func Idefix(books *model.Books, s string) {
 	} else {
 		bow.Find(".list-cell").Each(func(index int, item *goquery.Selection) {
 			title := item.Find(".item-name h3").Text()
-			author := item.Find(".who").Text()
+			author := item.Find(".who").First().Text()
 			pub := item.Find(".mb10").Text()
 			img, _ := item.Find("figure img").Attr("src")
 			price := item.Find(".price").Text()
