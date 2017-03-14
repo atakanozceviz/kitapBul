@@ -7,6 +7,7 @@ import (
 )
 
 var wg sync.WaitGroup
+var lock sync.Mutex
 
 func Search(books *model.Books, s string) *model.Books {
 	wg.Add(3)

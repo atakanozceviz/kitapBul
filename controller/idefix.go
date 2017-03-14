@@ -31,7 +31,9 @@ func Idefix(books *model.Books, s string) {
 					Price:     price,
 					WebSite:   "www.idefix.com",
 				}
+				lock.Lock()
 				model.Add(p, books)
+				lock.Unlock()
 			}
 
 		})

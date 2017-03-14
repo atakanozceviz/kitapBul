@@ -31,7 +31,9 @@ func Pandora(books *model.Books, s string) {
 			Price:     price,
 			WebSite:   "www.pandora.com.tr",
 		}
+		lock.Lock()
 		model.Add(p, books)
+		lock.Unlock()
 	}
 
 }

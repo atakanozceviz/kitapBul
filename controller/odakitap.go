@@ -31,7 +31,9 @@ func Odakitap(books *model.Books, s string) {
 			Price:     price,
 			WebSite:   "www.odakitap.com",
 		}
+		lock.Lock()
 		model.Add(p, books)
+		lock.Unlock()
 	}
 
 }
