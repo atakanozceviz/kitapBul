@@ -1,10 +1,11 @@
 package main
 
 import (
-	"os"
 	"runtime"
 
 	"strings"
+
+	"os"
 
 	"github.com/atakanozceviz/kitapBul/controller"
 	"github.com/atakanozceviz/kitapBul/model"
@@ -51,5 +52,7 @@ func searchJsonp(ctx *iris.Context) {
 	if k != "" {
 		var books model.Books
 		ctx.JSONP(iris.StatusOK, ctx.URLParam("callback"), controller.Search(&books, k))
+	} else {
+		ctx.JSONP(iris.StatusOK, ctx.URLParam("callback"), iris.Map{"err": "FormEmpty"})
 	}
 }
