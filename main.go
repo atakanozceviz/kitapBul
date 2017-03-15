@@ -6,6 +6,8 @@ import (
 
 	"strings"
 
+	"log"
+
 	"github.com/atakanozceviz/kitapBul/controller"
 	"github.com/atakanozceviz/kitapBul/model"
 	"gopkg.in/kataras/iris.v6"
@@ -23,23 +25,36 @@ func main() {
 		iris.DevLogger(),
 		httprouter.New(),
 	)
-	app.Get("/", search)
-	app.Get("/:params", search2)
+	app.Get("/", searchKeyword)
+	app.Get("/:params", searchUrl)
+	app.Get("/jsonp/:params", searchJsonp)
 	app.Listen(":" + port)
 }
 
-func search(ctx *iris.Context) {
+func searchKeyword(ctx *iris.Context) {
 	k := ctx.URLParam("keyword")
 	if k != "" {
 		var books model.Books
 		ctx.JSON(iris.StatusOK, controller.Search(&books, k))
 	}
 }
-func search2(ctx *iris.Context) {
+
+func searchUrl(ctx *iris.Context) {
 	rep := strings.NewReplacer("/", "")
 	k := rep.Replace(ctx.Request.URL.Path)
 	if k != "" {
 		var books model.Books
 		ctx.JSON(iris.StatusOK, controller.Search(&books, k))
+	}
+}
+
+func searchJsonp(ctx *iris.Context) {
+	k := ctx.URLParam("keyword")
+	if k != "" {
+		var books model.Books
+		err := ctx.JSONP(iris.StatusOK, ctx.URLParam("callback"), controller.Search(&books, k))
+		if err != nil {
+			log.Println(err)
+		}
 	}
 }
