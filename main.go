@@ -23,9 +23,9 @@ func main() {
 		iris.DevLogger(),
 		httprouter.New(),
 	)
-	app.Get("/keyword/:params", searchKeyword)
-	app.Get("/url/:params", searchUrl)
-	app.Get("/jsonp/:params", searchJsonp)
+	app.Get("/keyword/*params", searchKeyword)
+	app.Get("/url/*params", searchUrl)
+	app.Get("/jsonp/*params", searchJsonp)
 	app.Listen(":" + port)
 }
 
