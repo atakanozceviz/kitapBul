@@ -6,8 +6,6 @@ import (
 
 	"strings"
 
-	"log"
-
 	"github.com/atakanozceviz/kitapBul/controller"
 	"github.com/atakanozceviz/kitapBul/model"
 	"gopkg.in/kataras/iris.v6"
@@ -52,9 +50,6 @@ func searchJsonp(ctx *iris.Context) {
 	k := ctx.URLParam("keyword")
 	if k != "" {
 		var books model.Books
-		err := ctx.JSONP(iris.StatusOK, ctx.URLParam("callback"), controller.Search(&books, k))
-		if err != nil {
-			log.Println(err)
-		}
+		ctx.JSONP(iris.StatusOK, ctx.URLParam("callback"), controller.Search(&books, k))
 	}
 }
