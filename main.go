@@ -24,8 +24,8 @@ func main() {
 		httprouter.New(),
 	)
 	app.Get("/", searchKeyword)
-	app.Get("/url/:url", searchUrl)
-	app.Get("/jsonp/:jsonp", searchJsonp)
+	app.Get("/url/*url", searchUrl)
+	app.Get("/jsonp/*jsonp", searchJsonp)
 	app.Listen(":" + port)
 }
 
