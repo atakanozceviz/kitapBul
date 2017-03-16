@@ -21,7 +21,7 @@ func Pandora(books *model.Books, s string) {
 	pub := item.Find(".yy").Text()
 	img, _ := item.Find(".imgcont img").Attr("src")
 	price := item.Find(".fyt strong").Text()
-
+	website, _ := item.Find(".imgcont a").Attr("href")
 	if title != "" && price != "" {
 		p := model.Book{
 			Title:     title,
@@ -29,7 +29,7 @@ func Pandora(books *model.Books, s string) {
 			Publisher: pub,
 			Img:       "http://www.pandora.com.tr" + img,
 			Price:     price,
-			WebSite:   "www.pandora.com.tr",
+			WebSite:   "http://www.pandora.com.tr" + website,
 		}
 		lock.Lock()
 		model.Add(p, books)

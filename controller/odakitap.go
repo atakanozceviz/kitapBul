@@ -21,6 +21,7 @@ func Odakitap(books *model.Books, s string) {
 	pub := item.Find(".pd-publisher a span").Text()
 	img, _ := item.Find("#main_img").Attr("src")
 	price := item.Find("#prd_final_price_display").Text()
+	website := bow.Url().String()
 
 	if title != "" && price != "" {
 		p := model.Book{
@@ -29,7 +30,7 @@ func Odakitap(books *model.Books, s string) {
 			Publisher: pub,
 			Img:       "https://www.odakitap.com" + img,
 			Price:     price,
-			WebSite:   "www.odakitap.com",
+			WebSite:   website,
 		}
 		lock.Lock()
 		model.Add(p, books)

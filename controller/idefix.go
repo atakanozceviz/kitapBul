@@ -16,12 +16,13 @@ func Idefix(books *model.Books, s string) {
 		log.Fatal(err)
 	} else {
 		bow.Find(".list-cell").Each(func(index int, item *goquery.Selection) {
-			title := item.Find(".item-name h3").Text()
+			a := item.Find(".item-name")
+			title := a.Find("h3").Text()
 			author := item.Find(".who").First().Text()
 			pub := item.Find(".mb10").Text()
 			img, _ := item.Find("figure img").Attr("src")
 			price := item.Find(".price").Text()
-
+			website, _ := a.Attr("href")
 			if title != "" && price != "" {
 				p := model.Book{
 					Title:     title,
@@ -29,7 +30,7 @@ func Idefix(books *model.Books, s string) {
 					Publisher: pub,
 					Img:       img,
 					Price:     price,
-					WebSite:   "www.idefix.com",
+					WebSite:   "http://www.idefix.com" + website,
 				}
 				lock.Lock()
 				model.Add(p, books)
