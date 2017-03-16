@@ -1,11 +1,10 @@
 package main
 
 import (
+	"os"
 	"runtime"
 
 	"strings"
-
-	"os"
 
 	"github.com/atakanozceviz/kitapBul/controller"
 	"github.com/atakanozceviz/kitapBul/model"
@@ -24,9 +23,9 @@ func main() {
 		iris.DevLogger(),
 		httprouter.New(),
 	)
-	app.Get("/keyword/*params", searchKeyword)
-	app.Get("/url/*params", searchUrl)
-	app.Get("/jsonp/*params", searchJsonp)
+	app.Get("/", searchKeyword)
+	app.Get("/url/:url", searchUrl)
+	app.Get("/jsonp/:jsonp", searchJsonp)
 	app.Listen(":" + port)
 }
 
