@@ -38,7 +38,7 @@ func searchKeyword(ctx *iris.Context) {
 }
 
 func searchUrl(ctx *iris.Context) {
-	rep := strings.NewReplacer("/", "")
+	rep := strings.NewReplacer("/url/", "")
 	k := rep.Replace(ctx.Request.URL.Path)
 	if k != "" {
 		var books model.Books
