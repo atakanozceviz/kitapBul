@@ -24,22 +24,12 @@ func main() {
 		httprouter.New(),
 	)
 	app.Get("/", searchKeyword)
-	app.Get("/url/*url", searchUrl)
 	app.Get("/jsonp/*jsonp", searchJsonp)
 	app.Listen(":" + port)
 }
 
 func searchKeyword(ctx *iris.Context) {
 	k := ctx.URLParam("keyword")
-	if k != "" {
-		var books model.Books
-		ctx.JSON(iris.StatusOK, controller.Search(&books, k))
-	}
-}
-
-func searchUrl(ctx *iris.Context) {
-	rep := strings.NewReplacer("/url/", "")
-	k := rep.Replace(ctx.Request.URL.Path)
 	if k != "" {
 		var books model.Books
 		ctx.JSON(iris.StatusOK, controller.Search(&books, k))
