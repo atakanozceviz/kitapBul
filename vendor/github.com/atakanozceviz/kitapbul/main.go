@@ -4,10 +4,8 @@ import (
 	"os"
 	"runtime"
 
-	"strings"
-
-	"github.com/atakanozceviz/kitapBul/controller"
-	"github.com/atakanozceviz/kitapBul/model"
+	"github.com/atakanozceviz/kitapbul/controller"
+	"github.com/atakanozceviz/kitapbul/model"
 	"gopkg.in/kataras/iris.v6"
 	"gopkg.in/kataras/iris.v6/adaptors/httprouter"
 )
@@ -23,23 +21,25 @@ func main() {
 		iris.DevLogger(),
 		httprouter.New(),
 	)
-	app.Get("/", search)
-	app.Get("/:params", search2)
+	app.Get("/", searchKeyword)
+	app.Get("/jsonp/*jsonp", searchJsonp)
 	app.Listen(":" + port)
 }
 
-func search(ctx *iris.Context) {
+func searchKeyword(ctx *iris.Context) {
 	k := ctx.URLParam("keyword")
 	if k != "" {
 		var books model.Books
 		ctx.JSON(iris.StatusOK, controller.Search(&books, k))
 	}
 }
-func search2(ctx *iris.Context) {
-	rep := strings.NewReplacer("/", "")
-	k := rep.Replace(ctx.Request.URL.Path)
+
+func searchJsonp(ctx *iris.Context) {
+	k := ctx.URLParam("keyword")
 	if k != "" {
 		var books model.Books
-		ctx.JSON(iris.StatusOK, controller.Search(&books, k))
+		ctx.JSONP(iris.StatusOK, ctx.URLParam("callback"), controller.Search(&books, k))
+	} else {
+		ctx.JSONP(iris.StatusOK, ctx.URLParam("callback"), iris.Map{"err": "FormEmpty"})
 	}
 }

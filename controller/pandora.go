@@ -3,7 +3,7 @@ package controller
 import (
 	"log"
 
-	"github.com/atakanozceviz/kitapBul/model"
+	"github.com/atakanozceviz/kitapbul/model"
 	"github.com/headzoo/surf"
 )
 

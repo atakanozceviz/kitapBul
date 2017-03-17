@@ -1,1 +1,1 @@
-web: kitapBul
+web: kitapbul

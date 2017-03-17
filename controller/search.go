@@ -3,7 +3,7 @@ package controller
 import (
 	"sync"
 
-	"github.com/atakanozceviz/kitapBul/model"
+	"github.com/atakanozceviz/kitapbul/model"
 )
 
 var wg sync.WaitGroup

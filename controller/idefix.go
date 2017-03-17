@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/atakanozceviz/kitapBul/model"
+	"github.com/atakanozceviz/kitapbul/model"
 	"github.com/headzoo/surf"
 )
 
