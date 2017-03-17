@@ -4,10 +4,8 @@ import (
 	"os"
 	"runtime"
 
-	"strings"
-
-	"github.com/atakanozceviz/kitapBul/controller"
-	"github.com/atakanozceviz/kitapBul/model"
+	"github.com/atakanozceviz/kitapbul/controller"
+	"github.com/atakanozceviz/kitapbul/model"
 	"gopkg.in/kataras/iris.v6"
 	"gopkg.in/kataras/iris.v6/adaptors/httprouter"
 )
