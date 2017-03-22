@@ -17,7 +17,7 @@ func Hepsiburada(books *model.Books, s string) {
 	} else {
 		bow.Find(".product").Each(func(index int, item *goquery.Selection) {
 			title := item.Find(".product-title p").Text()
-			author := item.Find(".who").First().Text()
+			author := ""
 			pub := ""
 			img, _ := item.Find("img").Attr("src")
 			price := item.Find(".product-price").Text()
