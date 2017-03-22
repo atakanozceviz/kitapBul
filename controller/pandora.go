@@ -12,7 +12,7 @@ func Pandora(books *model.Books, s string) {
 	bow := surf.NewBrowser()
 	err := bow.Open("http://www.pandora.com.tr/Arama/?type=9&kitapadi=&yazaradi=&yayinevi=&isbn=" + s + "&resimli=1&dil=0&sirala=0")
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	item := bow.Find(".urunorta")
 

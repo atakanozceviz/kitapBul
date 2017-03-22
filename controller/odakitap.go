@@ -12,7 +12,7 @@ func Odakitap(books *model.Books, s string) {
 	bow := surf.NewBrowser()
 	err := bow.Open("https://www.odakitap.com/index.php?p=Products&q=" + s)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	item := bow.Find(".main-content")
 

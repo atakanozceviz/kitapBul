@@ -8,21 +8,20 @@ import (
 	"github.com/headzoo/surf"
 )
 
-func Idefix(books *model.Books, s string) {
+func Hepsiburada(books *model.Books, s string) {
 	defer wg.Done()
 	bow := surf.NewBrowser()
-	err := bow.Open("http://www.idefix.com/search?q=" + s)
+	err := bow.Open("http://www.hepsiburada.com/ara?q=" + s)
 	if err != nil {
 		log.Println(err)
 	} else {
-		bow.Find(".list-cell").Each(func(index int, item *goquery.Selection) {
-			a := item.Find(".item-name")
-			title := a.Find("h3").Text()
+		bow.Find(".product").Each(func(index int, item *goquery.Selection) {
+			title := item.Find(".product-title p").Text()
 			author := item.Find(".who").First().Text()
-			pub := item.Find(".mb10").Text()
-			img, _ := item.Find("figure img").Attr("src")
-			price := item.Find(".price").Text()
-			website, _ := a.Attr("href")
+			pub := ""
+			img, _ := item.Find("img").Attr("src")
+			price := item.Find(".product-price").Text()
+			website, _ := item.Find("a").First().Attr("href")
 			if title != "" && price != "" {
 				p := model.Book{
 					Title:     title,
@@ -30,7 +29,7 @@ func Idefix(books *model.Books, s string) {
 					Publisher: pub,
 					Img:       img,
 					Price:     price,
-					WebSite:   "http://www.idefix.com" + website,
+					WebSite:   "http://www.hepsiburada.com" + website,
 				}
 				lock.Lock()
 				model.Add(p, books)
